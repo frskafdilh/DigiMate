@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DigiMate - All-in-One Digital Store</title>
+    <!-- Font Awesome & Google Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Link CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="#" class="logo">
+                <img src="assets/mascot.png" alt="Mascot" class="logo-mascot-img" onerror="this.style.display='none'">
+                <span class="logo-text">Digi<span>Mate</span></span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#home">Beranda</a></li>
+                <li><a href="#levels">Jenjang</a></li>
+                <li><a href="#request-pr">Request Tugas</a></li>
+                <li><a href="#contact">Kontak</a></li>
+            </ul>
+            <button class="btn btn-primary btn-sm" onclick="openCommandPalette()">
+                <i class="fas fa-search"></i> Cari Matkul
+            </button>
+            <div class="hamburger"><i class="fas fa-bars"></i></div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-bg-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+        </div>
+        <div class="container hero-content">
+            <div class="hero-text fade-up">
+                <div class="hero-badge">
+                    <span class="badge-dot"></span>
+                    All-in-One Digital Store untuk Mahasiswa
+                </div>
+                <h1>Ruang Belajar Digital <br><span class="highlight">Untuk Semua Jenjang</span></h1>
+                <p>Platform lengkap untuk SMP, SMA, dan Mahasiswa. Request tugas, pilih mentor, dan belajar via Zoom dalam satu tempat yang praktis & terjangkau.</p>
+                <div class="hero-buttons">
+                    <a href="#request-pr" class="btn btn-primary"><i class="fas fa-rocket"></i> Request Tugas</a>
+                    <a href="#levels" class="btn btn-outline"><i class="fas fa-book-open"></i> Lihat Katalog</a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-item"><div class="stat-number">500+</div><div class="stat-label">Video Mentor</div></div>
+                    <div class="stat-item"><div class="stat-number">100+</div><div class="stat-label">Mentor Ahli</div></div>
+                    <div class="stat-item"><div class="stat-number">10K+</div><div class="stat-label">User Aktif</div></div>
+                </div>
+            </div>
+            <div class="hero-image fade-up delay-1">
+                <div class="mascot-container">
+                    <div class="mascot-float">
+                        <img src="assets/mascot.png" alt="Mascot" class="mascot-img" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'mascot-emoji\'>🐱</div>'">
+                    </div>
+                    <div class="floating-card card-1"><i class="fas fa-graduation-cap"></i><span>SMP</span></div>
+                    <div class="floating-card card-2"><i class="fas fa-book"></i><span>SMA</span></div>
+                    <div class="floating-card card-3"><i class="fas fa-user-graduate"></i><span>Mahasiswa</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Level Selection -->
+    <section id="levels" class="levels-section">
+        <div class="container">
+            <div class="section-header text-center fade-up">
+                <div class="section-tag">PILIH JENJANG</div>
+                <h2>Pilih Jenjang Pendidikanmu</h2>
+                <p>Kami menyediakan konten untuk semua level pendidikan</p>
+            </div>
+            <div class="level-grid">
+                <div class="level-card fade-up" onclick="selectLevel('smp')">
+                    <div class="level-icon-wrapper"><div class="level-icon"><i class="fas fa-school"></i></div><div class="level-icon-bg"></div></div>
+                    <h3>SMP</h3><p>Kelas 7, 8, 9 dengan video mentoring interaktif</p><div class="level-badge">6 Mata Pelajaran</div>
+                </div>
+                <div class="level-card featured fade-up delay-1" onclick="selectLevel('sma')">
+                    <div class="popular-tag">POPULER</div>
+                    <div class="level-icon-wrapper"><div class="level-icon"><i class="fas fa-graduation-cap"></i></div><div class="level-icon-bg"></div></div>
+                    <h3>SMA</h3><p>Persiapan UTBK & pendalaman materi jurusan</p><div class="level-badge">8 Mata Pelajaran</div>
+                </div>
+                <div class="level-card fade-up delay-2" onclick="selectLevel('mahasiswa')">
+                    <div class="level-icon-wrapper"><div class="level-icon"><i class="fas fa-user-graduate"></i></div><div class="level-icon-bg"></div></div>
+                    <h3>Mahasiswa</h3><p>Pilih jurusan → semester → mata kuliah</p><div class="level-badge">5+ Jurusan</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Subjects/Video Section -->
+    <section id="subjects-section" class="subjects-section" style="display:none;">
+        <div class="container">
+            <div class="section-header text-center">
+                <div class="section-tag">KATALOG</div>
+                <h2 id="subjects-title">Mata Pelajaran</h2>
+                <button class="btn-back" onclick="closeSubjects()"><i class="fas fa-arrow-left"></i> Kembali</button>
+            </div>
+            <div id="subjects-grid" class="subject-grid"></div>
+        </div>
+    </section>
+
+    <!-- Video Player Section -->
+    <section id="video-section" class="video-section" style="display:none;">
+        <div class="container">
+            <div class="section-header text-center">
+                <div class="section-tag">VIDEO MENTORING</div>
+                <h2 id="video-title">Video Mentoring</h2>
+                <button class="btn-back" onclick="closeVideo()"><i class="fas fa-arrow-left"></i> Kembali</button>
+            </div>
+            <div class="video-player-container">
+                <div class="video-placeholder"><i class="fas fa-play-circle"></i><p>Video akan diputar di sini</p></div>
+                <div class="video-info-panel">
+                    <h3 id="video-name"></h3>
+                    <p class="mentor-info"><i class="fas fa-chalkboard-teacher"></i> <span id="video-mentor"></span></p>
+                    <div class="video-meta">
+                        <span class="duration"><i class="fas fa-clock"></i> <span id="video-duration"></span></span>
+                        <span class="price-tag" id="video-price"></span>
+                    </div>
+                    <button class="btn btn-primary full-width" onclick="openPayment('video')"><i class="fas fa-lock"></i> Beli Akses - <span id="btn-price"></span></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mahasiswa Sections -->
+    <section id="jurusan-section" class="jurusan-section" style="display:none;">
+        <div class="container">
+            <div class="section-header text-center">
+                <div class="section-tag">MAHASISWA</div>
+                <h2>Pilih Jurusan</h2>
+                <button class="btn-back" onclick="closeJurusan()"><i class="fas fa-arrow-left"></i> Kembali</button>
+            </div>
+            <div id="jurusan-grid" class="jurusan-grid"></div>
+        </div>
+    </section>
+    <section id="semester-section" class="semester-section" style="display:none;">
+        <div class="container">
+            <div class="section-header text-center">
+                <div class="section-tag">SEMESTER</div>
+                <h2 id="semester-title">Pilih Semester</h2>
+                <button class="btn-back" onclick="closeSemester()"><i class="fas fa-arrow-left"></i> Kembali</button>
+            </div>
+            <div id="semester-grid" class="semester-grid"></div>
+        </div>
+    </section>
+    <section id="matkul-section" class="matkul-section" style="display:none;">
+        <div class="container">
+            <div class="section-header text-center">
+                <div class="section-tag">MATA KULIAH</div>
+                <h2 id="matkul-title">Daftar Mata Kuliah</h2>
+                <button class="btn-back" onclick="closeMatkul()"><i class="fas fa-arrow-left"></i> Kembali</button>
+            </div>
+            <div id="matkul-grid" class="matkul-grid"></div>
+        </div>
+    </section>
+
+    <!-- Request PR Section -->
+    <section id="request-pr" class="request-section">
+        <div class="container">
+            <div class="section-header text-center fade-up">
+                <div class="section-tag">FITUR UNGGULAN</div>
+                <h2>Request Tugas / PR</h2>
+                <p>Kirim soal kamu, mentor bidding, pilih yang terbaik!</p>
+            </div>
+
+            <!-- Step 1 -->
+            <div id="pr-step-1" class="pr-card fade-up">
+                <div class="pr-card-header">
+                    <div class="step-indicator">
+                        <div class="step active">1</div><div class="step-line"></div>
+                        <div class="step">2</div><div class="step-line"></div>
+                        <div class="step">3</div>
+                    </div>
+                    <h3><i class="fas fa-edit"></i> Ajukan Tugas Kamu</h3>
+                </div>
+                <form id="pr-form" onsubmit="submitPR(event)">
+                    <div class="form-group">
+                        <label><i class="fas fa-layer-group"></i> Jenjang</label>
+                        <select id="pr-level" required><option value="">-- Pilih Jenjang --</option><option value="SMP">SMP</option><option value="SMA">SMA</option><option value="Mahasiswa">Mahasiswa</option></select>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-book"></i> Mata Pelajaran / Kuliah</label>
+                        <input type="text" id="pr-subject" placeholder="Contoh: Kalkulus, Fisika" required>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-image"></i> Upload Foto Soal</label>
+                        <div class="file-upload">
+                            <input type="file" id="pr-image" accept="image/*" onchange="previewImage(event)">
+                            <label for="pr-image" class="file-label"><i class="fas fa-cloud-upload-alt"></i><span id="file-name">Klik untuk upload foto soal</span></label>
+                            <div id="image-preview" class="image-preview"></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-align-left"></i> Deskripsi Tugas</label>
+                        <textarea id="pr-desc" rows="3" placeholder="Jelaskan detail tugas..." required></textarea>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label><i class="fas fa-clock"></i> Waktu Mulai Sesi</label>
+                            <input type="datetime-local" id="pr-start-time" required>
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-wallet"></i> Budget Maksimal (Rp)</label>
+                            <input type="number" id="pr-budget" placeholder="50000" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary full-width"><i class="fas fa-paper-plane"></i> Kirim Request</button>
+                </form>
+            </div>
+
+            <!-- Step 2 -->
+            <div id="pr-step-2" class="pr-card" style="display:none;">
+                <div class="pr-card-header">
+                    <div class="step-indicator">
+                        <div class="step done"><i class="fas fa-check"></i></div><div class="step-line done"></div>
+                        <div class="step active">2</div><div class="step-line"></div>
+                        <div class="step">3</div>
+                    </div>
+                    <h3><i class="fas fa-users"></i> Mentor Mengajukan Diri</h3>
+                </div>
+                <p class="step-info">Mentor telah menentukan durasi & harga. Pilih yang terbaik!</p>
+                <div id="mentor-bids" class="mentor-bids"></div>
+                <button class="btn btn-outline full-width" onclick="resetPR()"><i class="fas fa-redo"></i> Buat Request Baru</button>
+            </div>
+
+            <!-- Step 3 -->
+            <div id="pr-step-3" class="pr-card" style="display:none;">
+                <div class="pr-card-header">
+                    <div class="step-indicator">
+                        <div class="step done"><i class="fas fa-check"></i></div><div class="step-line done"></div>
+                        <div class="step done"><i class="fas fa-check"></i></div><div class="step-line done"></div>
+                        <div class="step active">3</div>
+                    </div>
+                    <h3><i class="fas fa-calendar-check"></i> Konfirmasi Sesi Zoom</h3>
+                </div>
+                <div class="selected-mentor-info" id="selected-mentor-info"></div>
+                <div class="zoom-rules">
+                    <h4><i class="fas fa-info-circle"></i> Aturan Pembayaran & Waktu</h4>
+                    <ul>
+                        <li>⏱️ Durasi ditentukan oleh <strong>Mentor</strong> saat bidding</li>
+                        <li>✅ Jika mentor kehabisan waktu → Kamu <strong>GRATIS</strong></li>
+                        <li>✅ Jika mentor selesai cepat → Tanya tambahan <strong>GRATIS</strong></li>
+                        <li>📅 Sesi dijadwalkan: <strong id="confirm-start-time"></strong></li>
+                    </ul>
+                </div>
+                <div class="payment-summary">
+                    <div class="summary-row"><span>Harga Mentor</span><span id="summary-price">Rp 0</span></div>
+                    <div class="summary-row total"><span>Total Bayar</span><span id="summary-total">Rp 0</span></div>
+                </div>
+                <button class="btn btn-primary full-width" onclick="openPayment('pr')"><i class="fas fa-qrcode"></i> Bayar via QRIS</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modals -->
+    <div id="zoomModal" class="modal">
+        <div class="modal-content zoom-modal">
+            <h3><i class="fas fa-video"></i> Sesi Zoom Berlangsung</h3>
+            <div class="zoom-timer"><div class="timer-display" id="zoom-timer">00:00</div><p id="timer-status">Sesi berlangsung...</p></div>
+            <div class="zoom-participants">
+                <div class="participant"><div class="avatar">👨‍🏫</div><span id="zoom-mentor-name">Mentor</span></div>
+                <div class="participant"><div class="avatar">👤</div><span>Kamu</span></div>
+            </div>
+            <div class="zoom-controls">
+                <button class="zoom-btn"><i class="fas fa-microphone"></i></button>
+                <button class="zoom-btn"><i class="fas fa-video"></i></button>
+                <button class="zoom-btn"><i class="fas fa-comments"></i></button>
+                <button class="zoom-btn danger" onclick="endZoom()"><i class="fas fa-phone-slash"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <div id="ratingModal" class="modal">
+        <div class="modal-content rating-modal">
+            <div class="rating-mascot">🐱</div>
+            <h3>Beri Rating Mentor</h3>
+            <p id="rating-mentor-name">Mentor</p>
+            <div class="rating-stars">
+                <i class="far fa-star" data-rating="1"></i><i class="far fa-star" data-rating="2"></i><i class="far fa-star" data-rating="3"></i><i class="far fa-star" data-rating="4"></i><i class="far fa-star" data-rating="5"></i>
+            </div>
+            <textarea id="rating-comment" rows="3" placeholder="Tulis komentar (opsional)"></textarea>
+            <button class="btn btn-primary full-width" onclick="submitRating()"><i class="fas fa-check"></i> Kirim Rating</button>
+        </div>
+    </div>
+
+    <div id="paymentModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="payment-mascot">🐱</div>
+            <h3>Pembayaran QRIS</h3>
+            <p id="modal-item-name">Item</p>
+            <div class="qr-display"><i class="fas fa-qrcode"></i><p>Scan to Pay</p></div>
+            <h2 id="modal-price">Rp 0</h2>
+            <p class="note">Setelah bayar, klik konfirmasi untuk masuk sesi.</p>
+            <button class="btn btn-primary full-width" onclick="confirmPayment()"><i class="fas fa-check"></i> Saya Sudah Bayar</button>
+        </div>
+    </div>
+
+    <div id="command-palette" class="command-palette">
+        <div class="command-content">
+            <div class="command-header">
+                <i class="fas fa-search"></i>
+                <input type="text" id="command-input" placeholder="Ketik nama mata kuliah..." autocomplete="off">
+                <kbd class="close-hint">ESC</kbd>
+            </div>
+            <div id="command-results" class="command-results"><p class="empty-state">Mulai ketik untuk mencari...</p></div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-mascot"></div>
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h3>DigiMate</h3>
+                    <p>All-in-one digital store untuk pelajar & mahasiswa Indonesia. Praktis, terjangkau, dan mudah diakses.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Tim Kami</h3>
+                    <ul>
+                        <li><i class="fas fa-user"></i> Friska Fadilah (251401011)</li>
+                        <li><i class="fas fa-user"></i> Sri Rezeki Marito Manalu (251401083)</li>
+                        <li><i class="fas fa-user"></i> Ibnu Ad'ha Hasibuan (251401116)</li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Kontak</h3>
+                    <p><i class="fab fa-whatsapp"></i> +62 812-3456-7890</p>
+                    <p><i class="fab fa-instagram"></i> @digimate.id</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 DigiMate. All Rights Reserved. | Tim: Butuh Uang</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Link JS -->
+    <script src="js/script.js"></script>
+</body>
+</html>
